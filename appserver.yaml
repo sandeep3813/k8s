@@ -1,0 +1,116 @@
+{
+  "kind": "Deployment",
+  "apiVersion": "extensions/v1beta1",
+  "metadata": {
+    "name": "appiyoappserver",
+    "namespace": "appiyo-ignite",
+    "selfLink": "/apis/extensions/v1beta1/namespaces/appiyo-ignite/deployments/appiyoappserver",
+    "uid": "2a6549df-8840-11e9-b94f-b690082a67bf",
+    "resourceVersion": "27189627",
+    "generation": 32,
+    "creationTimestamp": "2019-06-06T09:47:58Z",
+    "labels": {
+      "name": "appiyoappserver",
+      "tier": "backend"
+    },
+    "annotations": {
+      "deployment.kubernetes.io/revision": "32",
+      "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"extensions/v1beta1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{},\"labels\":{\"name\":\"appiyoappserver\",\"tier\":\"backend\"},\"name\":\"appiyoappserver\",\"namespace\":\"appiyo-ignite\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"name\":\"appiyoappserver\"}},\"template\":{\"metadata\":{\"creationTimestamp\":null,\"labels\":{\"name\":\"appiyoappserver\",\"tier\":\"backend\"}},\"spec\":{\"containers\":[{\"args\":[\"/opt/startup.sh {\\\\\\\"url\\\\\\\":\\\\\\\"appiyomongoserver.appiyo-ignite.svc.cluster.local:27017\\\\\\\"}\"],\"command\":[\"/bin/bash\",\"-c\",\"--\"],\"env\":[{\"name\":\"LOG_MNT_DIR\",\"value\":\"/opt/logs\"},{\"name\":\"PS_TC_CONTEXT_PATH\",\"value\":\"/internaladmin/cadigitization/appiyo/\"},{\"name\":\"PS_TC_COOKIE_PATH\",\"value\":\"/internaladmin/cadigitization/appiyo/\"},{\"name\":\"PS_AUTH_SESSION_TIMEOUT\",\"value\":\"7200000\"},{\"name\":\"PS_TC_COOKIE_INFO\",\"value\":\"{\\\"path\\\":\\\"/\\\",\\\"domain\\\":null,\\\"httponly\\\":true,\\\"secure\\\":true,\\\"samesite\\\":\\\"strict\\\"}\"}],\"image\":\"myappiyocontainerreg.azurecr.io/appiyo_appserver:3_5_0_451_v2\",\"imagePullPolicy\":\"Always\",\"name\":\"appiyoappserver\"}],\"imagePullSecrets\":[{\"name\":\"appiyo-ignite-acr-auth\"}]}}}}\n"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "name": "appiyoappserver"
+      }
+    },
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "name": "appiyoappserver",
+          "tier": "backend"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "appiyoappserver",
+            "image": "myappiyocontainerreg.azurecr.io/appiyo_appserver:4_0_0_460_v1",
+            "command": [
+              "/bin/bash",
+              "-c",
+              "--"
+            ],
+            "args": [
+              "/opt/startup.sh {\\\"url\\\":\\\"mongodb:\\\\/\\\\/appiyomongoserver.appiyo-ignite.svc.cluster.local:27017\\\"}"
+            ],
+            "env": [
+              {
+                "name": "LOG_MNT_DIR",
+                "value": "/opt/logs"
+              },
+              {
+                "name": "PS_TC_CONTEXT_PATH",
+                "value": "/internaladmin/sd/appiyo/"
+              },
+              {
+                "name": "PS_TC_COOKIE_PATH",
+                "value": "/internaladmin/sd/appiyo/"
+              },
+              {
+                "name": "PS_AUTH_SESSION_TIMEOUT",
+                "value": "7200000"
+              },
+              {
+                "name": "PS_TC_COOKIE_INFO",
+                "value": "{\"path\":\"/\",\"domain\":null,\"httponly\":true,\"secure\":true,\"samesite\":\"strict\"}"
+              }
+            ],
+            "resources": {},
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "Always"
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "securityContext": {},
+        "imagePullSecrets": [
+          {
+            "name": "appiyo-ignite-acr-auth"
+          }
+        ],
+        "schedulerName": "default-scheduler"
+      }
+    },
+    "strategy": {
+      "type": "RollingUpdate",
+      "rollingUpdate": {
+        "maxUnavailable": 1,
+        "maxSurge": 1
+      }
+    },
+    "revisionHistoryLimit": 10,
+    "progressDeadlineSeconds": 2147483647
+  },
+  "status": {
+    "observedGeneration": 32,
+    "replicas": 1,
+    "updatedReplicas": 1,
+    "readyReplicas": 1,
+    "availableReplicas": 1,
+    "conditions": [
+      {
+        "type": "Available",
+        "status": "True",
+        "lastUpdateTime": "2019-06-06T09:47:58Z",
+        "lastTransitionTime": "2019-06-06T09:47:58Z",
+        "reason": "MinimumReplicasAvailable",
+        "message": "Deployment has minimum availability."
+      }
+    ]
+  }
+}

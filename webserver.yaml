@@ -1,0 +1,108 @@
+{
+  "kind": "Deployment",
+  "apiVersion": "extensions/v1beta1",
+  "metadata": {
+    "name": "appiyowebserver",
+    "namespace": "appiyo-ignite",
+    "selfLink": "/apis/extensions/v1beta1/namespaces/appiyo-ignite/deployments/appiyowebserver",
+    "uid": "85b9c690-8844-11e9-b94f-b690082a67bf",
+    "resourceVersion": "27189930",
+    "generation": 17,
+    "creationTimestamp": "2019-06-06T10:19:09Z",
+    "labels": {
+      "name": "appiyowebserver",
+      "tier": "frontend"
+    },
+    "annotations": {
+      "deployment.kubernetes.io/revision": "19",
+      "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"extensions/v1beta1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{},\"labels\":{\"name\":\"appiyowebserver\",\"tier\":\"frontend\"},\"name\":\"appiyowebserver\",\"namespace\":\"appiyo-ignite\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"name\":\"appiyowebserver\"}},\"template\":{\"metadata\":{\"creationTimestamp\":null,\"labels\":{\"name\":\"appiyowebserver\",\"tier\":\"frontend\"}},\"spec\":{\"containers\":[{\"args\":[\"/opt/startup.sh\"],\"command\":[\"/bin/sh\",\"-c\",\"--\"],\"env\":[{\"name\":\"APPIYO_APP_IP\",\"value\":\"10.0.209.105\"}],\"image\":\"myappiyocontainerreg.azurecr.io/giri_appiyo_webserver:3_5_0_451_cadigitization_v2\",\"name\":\"appiyowebserver\",\"ports\":[{\"containerPort\":443,\"hostPort\":443,\"protocol\":\"TCP\"}]}],\"imagePullSecrets\":[{\"name\":\"appiyo-ignite-acr-auth\"}]}}}}\n"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "name": "appiyowebserver"
+      }
+    },
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "name": "appiyowebserver",
+          "tier": "frontend"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "appiyowebserver",
+            "image": "myappiyocontainerreg.azurecr.io/appiyo_webserver_ignite:v4_0_0_460_v59",
+            "command": [
+              "/bin/sh",
+              "-c",
+              "--"
+            ],
+            "args": [
+              "/opt/startup.sh"
+            ],
+            "ports": [
+              {
+                "hostPort": 443,
+                "containerPort": 443,
+                "protocol": "TCP"
+              }
+            ],
+            "env": [
+              {
+                "name": "APPIYO_APP_IP",
+                "value": "10.0.209.105"
+              }
+            ],
+            "resources": {},
+            "terminationMessagePath": "/dev/termination-log",
+            "terminationMessagePolicy": "File",
+            "imagePullPolicy": "IfNotPresent"
+          }
+        ],
+        "restartPolicy": "Always",
+        "terminationGracePeriodSeconds": 30,
+        "dnsPolicy": "ClusterFirst",
+        "securityContext": {},
+        "imagePullSecrets": [
+          {
+            "name": "appiyo-ignite-acr-auth"
+          }
+        ],
+        "schedulerName": "default-scheduler"
+      }
+    },
+    "strategy": {
+      "type": "RollingUpdate",
+      "rollingUpdate": {
+        "maxUnavailable": 1,
+        "maxSurge": 1
+      }
+    },
+    "revisionHistoryLimit": 10,
+    "progressDeadlineSeconds": 2147483647
+  },
+  "status": {
+    "observedGeneration": 17,
+    "replicas": 1,
+    "updatedReplicas": 1,
+    "readyReplicas": 1,
+    "availableReplicas": 1,
+    "conditions": [
+      {
+        "type": "Available",
+        "status": "True",
+        "lastUpdateTime": "2019-06-06T10:19:09Z",
+        "lastTransitionTime": "2019-06-06T10:19:09Z",
+        "reason": "MinimumReplicasAvailable",
+        "message": "Deployment has minimum availability."
+      }
+    ],
+    "collisionCount": 1
+  }
+}
